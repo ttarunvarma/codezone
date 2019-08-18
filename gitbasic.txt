@@ -1,0 +1,222 @@
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~
+$ mkdir tarun
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~
+$ git clone https://github.com/ttarunvarma/codezone
+Cloning into 'codezone'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~
+$ cd codezone/
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ ls
+README.md
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ vim README.md
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ vim 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git add 1.c
+warning: LF will be replaced by CRLF in 1.c.
+The file will have its original line endings in your working directory
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   1.c
+
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git commit
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'Aishwarya@DESKTOP-UML2OIK.(none)')
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git config user.email "t.tarunvarma@gmail.com"
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git config user.name "ttarunvarma"
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git commit -a -m "my First prog"
+[master f1d75f0] my First prog
+ 1 file changed, 7 insertions(+)
+ create mode 100644 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git log
+commit f1d75f094dd614be5abafc51cae8fdc79f4a423e (HEAD -> master)
+Author: ttarunvarma <t.tarunvarma@gmail.com>
+Date:   Sat Aug 17 23:06:04 2019 -0700
+
+    my First prog
+
+commit 3b1d2c8ec0c529433e3c94bc470f80bfcd1b1127 (origin/master, origin/HEAD)
+Author: ttarunvarma <54228376+ttarunvarma@users.noreply.github.com>
+Date:   Sat Aug 17 22:48:52 2019 -0700
+
+    Initial commit
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git remote -v
+origin  https://github.com/ttarunvarma/codezone (fetch)
+origin  https://github.com/ttarunvarma/codezone (push)
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git push origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 333 bytes | 22.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/ttarunvarma/codezone
+   3b1d2c8..f1d75f0  master -> master
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ ls
+1.c  README.md
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git pull origin master
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/ttarunvarma/codezone
+ * branch            master     -> FETCH_HEAD
+   f1d75f0..b45405b  master     -> origin/master
+Updating f1d75f0..b45405b
+Fast-forward
+ 2.c | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 2.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ ls
+1.c  2.c  README.md
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ ls
+1.c  2.c  README.md
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ vim 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git checkout 1.c
+Updated 0 paths from the index
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ vim 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git  pull orgin master
+fatal: 'orgin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git  pull origin master
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/ttarunvarma/codezone
+ * branch            master     -> FETCH_HEAD
+   b45405b..b3ca33e  master     -> origin/master
+Updating b45405b..b3ca33e
+Fast-forward
+ 1.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ vim 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git checkout 1.c
+Updated 0 paths from the index
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git log
+commit b3ca33ea6ec4a37123e05cd7af999ab7ebfa36de (HEAD -> master, origin/master, origin/HEAD)
+Author: ttarunvarma <54228376+ttarunvarma@users.noreply.github.com>
+Date:   Sat Aug 17 23:14:40 2019 -0700
+
+    1.c
+
+    second change for 1.c
+
+commit b45405b30bfa1257ec421109842ab25c72d73a36
+Author: ttarunvarma <54228376+ttarunvarma@users.noreply.github.com>
+Date:   Sat Aug 17 23:11:37 2019 -0700
+
+    Create 2.c
+
+    thid second file
+
+commit f1d75f094dd614be5abafc51cae8fdc79f4a423e
+Author: ttarunvarma <t.tarunvarma@gmail.com>
+Date:   Sat Aug 17 23:06:04 2019 -0700
+
+    my First prog
+
+commit 3b1d2c8ec0c529433e3c94bc470f80bfcd1b1127
+Author: ttarunvarma <54228376+ttarunvarma@users.noreply.github.com>
+Date:   Sat Aug 17 22:48:52 2019 -0700
+
+    Initial commit
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone (master)
+$ git checkout f1d75f094dd614be5abafc51cae8fdc79f4a423e
+Note: checking out 'f1d75f094dd614be5abafc51cae8fdc79f4a423e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at f1d75f0 my First prog
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone ((f1d75f0...))
+$ vim 1.c
+
+Aishwarya@DESKTOP-UML2OIK MINGW64 ~/codezone ((f1d75f0...))
+$ cd codezone/
