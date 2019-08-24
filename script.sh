@@ -1,20 +1,27 @@
 #! /bin/sh
 
 : '  For multiline Comments
-1st Unlink 2 Fifo
+1st Unlink
 2nd Create 2 ELF
-3rd Execute them(One in the backgroung)
+3rd Execute them(One in the backgroung) 
 
 '
-unlink server_fifo
-unlink cli_*
+#find . -type l -exec unlink {} \; # Not working
+ls
+rm -vf server_fifo client_fifo_1 client_fifo_2 client_fifo_3
 
 echo Unlink 2 fifo
-make server_fifo client_fifo_1
+make server_fifo client_fifo_1 client_fifo_2 client_fifo_3
 
 echo created 2 ELF
-ls
-./server &   # Executes in backgroung, which makes command prompt available
-ls
-./client1
-ls
+echo Run server_fifo.exe
+echo ---------------
+./server_fifo &   # Executes in backgroung, which makes command prompt available
+
+./client_fifo_1 & 
+./client_fifo_2 &
+./client_fifo_3
+
+echo END SCRIPT
+
+
