@@ -1,0 +1,2 @@
+1. How to unlink mutiple fifo?
+2. How can server know the size to read from fifo?
