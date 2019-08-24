@@ -5,17 +5,17 @@
 #include <fcntl.h>
 #include <string.h>
 
-#define SERVER_FIFO "./server_fifo"
-#define CLIENT_FIFO "./cli_%d_fifo"
+#define SERVER_FIFO "./SERVER_FIFO"
+#define CLIENT_FIFO "./CLI_%d_FIFO"
 #define _PP( msg, ...) printf("%3d:%s::"#msg"\n", __LINE__,__FILE__, ##__VA_ARGS__)
-
+typedef unsigned char uchar;
 typedef struct Data{
-        int dtsize;
+	uchar dtsize;
         pid_t pid;
-        struct{
-                int strlength;
-                char data[35];
-        };
+	struct{
+		uchar strlength;
+        	char data[35];
+	};
 }mydata;
 
 void error_call(char *s)
@@ -25,38 +25,55 @@ void error_call(char *s)
 }
 void printfmsg(const mydata *m) {
 _PP(structsize=%d\tpid=%d\ndata=%s\tstrlength=%d,m->dtsize, m->pid, m->data, m->strlength);}
+uchar open_fifo (char *fifo, uchar mode){
+	uchar fd;
+	_PP(Opening %s\n,fifo);
+	fd = open (fifo, mode);
+	if(fd == -1) error_call("Client1 Open Fail");
+	else _PP(Sucessfully opened %s, fifo);
+	return fd;
+}
+void read_fifo(uchar fd, char *buf, uchar size){
+	uchar count;
+	count =	read(fd, buf, size);
+	if(count == -1) error_call("Client1 Read Fail!");
+	else _PP(READ %d bytes from ClientFIFO,count);
+	buf[count] = '\0';
+}
+void write_fifo(uchar fd, mydata *buf, uchar size){
+	uchar count;
+	count =	write(fd, buf, size);
+	if(count == -1) error_call("Client1 Write Fail!");
+	else _PP(Wrote %d bytes into server fifo, count);
+}
+
 int main()
 {
-        int fd,count;
-        mydata md;
-        char cli_fifo[20];
-        char rbuf[50];
-        /* Initializing values*/
-        md.dtsize = sizeof(mydata);
-        md.pid = getpid();
-        strcpy(md.data,"MSG DATA::Client1 MESSAGE");
-        md.strlength = strlen(md.data);
-        /*Operation*/
-        printfmsg(&md);
-        _PP(Opening SERVERFIFO.....);
-        fd = open(SERVER_FIFO, O_WRONLY);
-        _PP(SERVERFIFO open sucessfully & writing on FIFO);
-        count = write(fd, &md, md.dtsize);
-        _PP(Wrote %d bytes on fifo by client1., count);
+	uchar fd,count;
+	mydata md;
+	char cli_fifo[20];
+	char rbuf[50];
+	/* Initializing values*/
+	_PP(START\n--------);		
+	md.dtsize = sizeof(mydata);
+	md.pid = getpid();
+	strcpy(md.data,"MSG DATA::Client1 MESSAGE");
+	md.strlength = strlen(md.data);
+	/*Operation*/
+	printfmsg(&md);
+	fd = open_fifo(SERVER_FIFO, O_WRONLY);
+	write_fifo(fd, &md, md.dtsize);
 
-        sprintf(cli_fifo, CLIENT_FIFO, md.pid);
-        if(access(cli_fifo, F_OK) == -1)
+	sprintf(cli_fifo, CLIENT_FIFO, md.pid);
+	if(access(cli_fifo, F_OK) == -1)
         {
                 if(mkfifo(cli_fifo, 0777)) error_call("Client1FIFO creation failed");
                 else _PP(Client1FIFO Creation Sucessfull);
         }
-        _PP(Opening client1fifo:%s, cli_fifo);
-        fd = open(cli_fifo, O_RDONLY);
-        _PP(Client1fifo Opened successfully & reading the msg..);
-        count = read(fd, rbuf, md.strlength);
-        rbuf[count] = '\0';
-        _PP(Read %d bytes from client1fifo:%s, count, rbuf);
-        _PP(End);
-
-        return 0;
+	fd = open_fifo(cli_fifo, O_RDONLY);
+	read_fifo(fd, rbuf, md.strlength);
+	_PP(Output: %s, rbuf);
+	_PP(End\n);
+	
+	return 0;
 }
